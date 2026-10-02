@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ExpenseBucket {
+  HOUSEHOLD
+  MYSELF
+  WIFE
+  PARENTS
+}
+
+enum PaidBy {
+  HUSBAND
+  WIFE
+}
+
+enum SettlementType {
+  DEBT_REDUCTION
+  GENERAL_TRANSFER
+}
+
+model Settings {
+  id                String   @id @default("default")
+  husbandName       String   @default("Ravi")
+  wifeName          String   @default("Chandani")
+  currency          String   @default("₹")
+  theme             String   @default("system")
+  passcode          String   @default("0000")
+  passcodeUpdatedAt DateTime @default(now())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Category {
+  id        String        @id @default(cuid())
+  name      String        @unique
+  bucket    ExpenseBucket @default(HOUSEHOLD)
+  isDefault Boolean       @default(false)
+  createdAt DateTime      @default(now())
+}
+
+model PaymentOption {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  type      String   @default("UPI") // CARD, UPI, BANK, WALLET, CASH, OTHER
+  isDefault Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Expense {
+  id            String        @id @default(cuid())
+  title         String
+  amount        Float
+  bucket        ExpenseBucket
+  category      String        @default("General")
+  paidBy        PaidBy        @default(HUSBAND)
+  paymentMethod String        @default("Credit Card")
+  date          DateTime      @default(now())
+  notes         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([date])
+  @@index([bucket])
+  @@index([paidBy])
+}
+
+model Settlement {
+  id            String         @id @default(cuid())
+  amount        Float
+  date          DateTime       @default(now())
+  from          PaidBy         @default(WIFE)
+  to            PaidBy         @default(HUSBAND)
+  type          SettlementType @default(DEBT_REDUCTION)
+  notes         String?
+  paymentMethod String         @default("Bank UPI")
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([date])
+}

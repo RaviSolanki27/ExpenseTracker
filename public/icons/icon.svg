@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background with smooth rounded edges -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
+  <rect width="504" height="504" x="4" y="4" rx="108" fill="none" stroke="#27272a" stroke-width="4"/>
+
+  <!-- Minimalist Geometric Dual Balances -->
+  <!-- Husband / House loop -->
+  <circle cx="210" cy="240" r="105" fill="none" stroke="url(#primaryGrad)" stroke-width="26" opacity="0.95"/>
+  <!-- Wife / Parents loop -->
+  <circle cx="302" cy="240" r="105" fill="none" stroke="url(#accentGrad)" stroke-width="26" opacity="0.9"/>
+
+  <!-- Center Balance Node -->
+  <circle cx="256" cy="240" r="22" fill="#ffffff" opacity="0.98"/>
+
+  <!-- Elegant Horizon Line / Ledger Base -->
+  <path d="M150 380 L362 380" stroke="#71717a" stroke-width="14" stroke-linecap="round" opacity="0.7"/>
+  <path d="M210 405 L302 405" stroke="#10b981" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+</svg>
